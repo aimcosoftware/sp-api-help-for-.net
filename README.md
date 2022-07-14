@@ -71,3 +71,28 @@ AccessKey = XMLValue(Res, "AccessKeyId")
 SecretKey = XMLValue(Res, "SecretAccessKey")
 SecureToken = XMLValue(Res, "SessionToken")
 ```
+## 3. Signing and hashing support
+```
+Function Signature(StringToSign As String, Service As String) As String
+	kSecret = $"AWS4{SecretKey}".ToUTF
+	kDate = Hmac(UTC.ToString("yyyyMMdd"), kSecret)
+	kRegion = Hmac(Region, kDate)
+	kService = Hmac(Service, kRegion)
+	kSigning = Hmac("aws4_request", kService)
+	Return Hmac(StringToSign, kSigning).ToHex
+End Function
+
+Function Hmac(Data As String, Key As Byte()) As Byte()
+  ' Use this specific class from System.Security.Cryptography
+	Using Hma = KeyedHashAlgorithm.Create("HmacSHA256")
+		Hma.Key = Key
+		Return Hma.ComputeHash(Encoding.UTF8.GetBytes(Data))
+	End Using
+End Function
+
+Function Hash(Data As String) As String
+	Using Sha = HashAlgorithm.Create("SHA256")
+		Return Sha.ComputeHash(Encoding.UTF8.GetBytes(Data)).ToHex
+	End Using
+End Function
+```
