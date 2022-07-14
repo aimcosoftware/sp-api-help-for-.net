@@ -12,6 +12,7 @@ After you have create an IAM user on AWS you need to use your ClientId and Clien
 
 ```
 'Create JSON request (we use our own library for this)
+
 Json.OpenBrace()
 Json.AddPair("grant_type", "refresh_token")
 Json.AddPair("client_id", "amzn1.application-oa2-client.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
@@ -19,7 +20,8 @@ Json.AddPair("client_secret", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Json.AddPair("refresh_token", RefreshToken)
 Json.CloseBrace()
 
-'Make the req (we use our own library based on WebClient)
+'Make the request (we use our own library based on WebClient)
+
 Req.Header = "content:application/json"
 Req.Header = "content-type:application/json"
 
