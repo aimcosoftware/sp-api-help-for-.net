@@ -73,6 +73,7 @@ SecureToken = XMLValue(Res, "SessionToken")
 ```
 ## 3. Signing and hashing support
 ```
+' Create signature for each request
 Function Signature(StringToSign As String, Service As String) As String
 	kSecret = $"AWS4{SecretKey}".ToUTF
 	kDate = Hmac(UTC.ToString("yyyyMMdd"), kSecret)
@@ -82,8 +83,8 @@ Function Signature(StringToSign As String, Service As String) As String
 	Return Hmac(StringToSign, kSigning).ToHex
 End Function
 
+' Use this specific class from System.Security.Cryptography
 Function Hmac(Data As String, Key As Byte()) As Byte()
-  ' Use this specific class from System.Security.Cryptography
 	Using Hma = KeyedHashAlgorithm.Create("HmacSHA256")
 		Hma.Key = Key
 		Return Hma.ComputeHash(Encoding.UTF8.GetBytes(Data))
