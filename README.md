@@ -29,3 +29,45 @@ If Res.Contains("access_token")
 End If
 
 ```
+## 2. Get the AWS STS token from your IAM User
+User your IAM user role credentials to get a security token
+```
+TimeStamp = UTC.ToString("yyyyMMddTHHmmssZ")
+DateStamp = UTC.ToString("yyyyMMdd")
+
+' Uri encoded body
+Body = $"Action=AssumeRole&Version=2011-06-15&RoleArn=arn%3Aaws%3Aiam%3A%3Axxxxxxxxxxxx%3Arole%2FSellingPartnerAPIRole&RoleSessionName={Now.ToUnixTime}"
+
+' Uri details to hash for signing, region is us-east-1, eu-west-1, etc
+Post = "POST" & vbLf
+Post &= "/" & vbLf & vbLf
+
+Post &= $"host:sts.{Region}.amazonaws.com" & vbLf
+Post &= $"x-amz-date:{TimeStamp}" & vbLf & vbLf
+
+Post &= "host;x-amz-date" & vbLf
+Post &= Hash(Body)
+
+' AWS4 string to sign
+Sign = "AWS4-HMAC-SHA256" & vbLf
+Sign &= TimeStamp & vbLf
+Sign &= $"{DateStamp}/{Region}/sts/aws4_request" & vbLf
+Sign &= Hash(Post)
+
+SecretKey = "AWS IAM user secret key"
+AccessKey = "AWS IAM user access key"
+
+' Authorization header (Signature function is below)
+Req.Header = $"Authorization:AWS4-HMAC-SHA256 Credential={AccessKey}/{DateStamp}/{Region}/sts/aws4_request, SignedHeaders=host;x-amz-date, Signature={Signature(Sign, "sts")}"
+
+' Add other headers and make request
+Req.Header = "content-type:application/x-www-form-urlencoded"
+Req.Header = $"host:sts.{Region}.amazonaws.com"
+Req.Header = $"x-amz-date:{TimeStamp}"
+Dim Res = Req.PostData($"https://sts.{Region}.amazonaws.com", Body)
+
+' Credentials required to sign and make other API calls
+AccessKey = XMLValue(Res, "AccessKeyId")
+SecretKey = XMLValue(Res, "SecretAccessKey")
+SecureToken = XMLValue(Res, "SessionToken")
+```
