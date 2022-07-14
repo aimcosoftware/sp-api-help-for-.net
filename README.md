@@ -143,7 +143,7 @@ End Function
 
 ## .5 Putting it all together to get a MFN label
 ```
-' Get all your App, IAM and client credentials here
+' Get your App, IAM, client and region details here
 
 ' Get LWA token using your Amazon App credentials
 GetLWAToken()
