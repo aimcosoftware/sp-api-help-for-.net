@@ -6,7 +6,8 @@ Sample code and tips for connecting to Amazon Selling Partner API from .Net
 #### We have only used pseudo code here, except where a specific library is needed
 
 
-## 1. Get the LWA AccessToken - required to get STS token for SP API requests
+## 1. Get the LWA AccessToken
+### Required to get STS token for SP API requests
 
 Use your ClientId and ClientSecret from your Amazon App and your client's Refresh Token to get an Access Token
 ```
@@ -29,7 +30,8 @@ If Res.Contains("access_token")
 End If
 
 ```
-## 2. Get the AWS STS token from your IAM User - required to make SP API calls
+## 2. Get the AWS STS token from your IAM User
+## Required to make SP API calls
 User your IAM user role credentials to get a security token
 ```
 TimeStamp = UTC.ToString("yyyyMMddTHHmmssZ")
