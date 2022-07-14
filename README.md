@@ -68,12 +68,12 @@ Sub GetSTSCredentials()
 	AccessKey = "AWS IAM user access key"
 
 	' Authorization header (Signature function is below)
-	Req.Header = $"Authorization:AWS4-HMAC-SHA256 Credential={AccessKey}/{DateStamp}/{Region}/sts/aws4_request, SignedHeaders=host;x-amz-date, Signature={Signature(Sign, "sts")}"
+	Req.AddHeader($"Authorization:AWS4-HMAC-SHA256 Credential={AccessKey}/{DateStamp}/{Region}/sts/aws4_request, SignedHeaders=host;x-amz-date, Signature={Signature(Sign, "sts")}")
 
 	' Add other headers and make request
-	Req.Header = "content-type:application/x-www-form-urlencoded"
-	Req.Header = $"host:sts.{Region}.amazonaws.com"
-	Req.Header = $"x-amz-date:{TimeStamp}"
+	Req.AddHeader("content-type:application/x-www-form-urlencoded")
+	Req.AddHeader($"host:sts.{Region}.amazonaws.com")
+	Req.AddHeader($"x-amz-date:{TimeStamp}")
 	Dim Res = Req.PostData($"https://sts.{Region}.amazonaws.com", Body)
 
 	' Credentials to sign SP API calls (valid for 1 hour)
@@ -137,14 +137,14 @@ Function AmazonRequest(API As String, Data As String) As String
 	Sign &= Hash(Post)
 
 	' Add request headers
-	Req.Header = $"Authorization: AWS4-HMAC-SHA256 Credential={AccessKey}/{DateStamp}/{Region}/execute-api/aws4_request, SignedHeaders=accept;content-type;host;user-agent, Signature={Signature(Sign, "execute-api")}"
-	Req.Header = "accept:application/json"
-	Req.Header = "content-type:application/json"
-	Req.Header = $"host:{Host}"
-	Req.Header = $"user-agent:{UserAgent}"
-	Req.Header = $"x-amz-security-token:{SecureToken}"
-	Req.Header = $"x-amz-access-token:{AccessToken}"
-	Req.Header = $"x-amz-date:{TimeStamp}"
+	Req.AddHeader($"Authorization: AWS4-HMAC-SHA256 Credential={AccessKey}/{DateStamp}/{Region}/execute-api/aws4_request, SignedHeaders=accept;content-type;host;user-agent, Signature={Signature(Sign, "execute-api")}")
+	Req.AddHeader("accept:application/json")
+	Req.AddHeader("content-type:application/json")
+	Req.AddHeader($"host:{Host}")
+	Req.AddHeader($"user-agent:{UserAgent}")
+	Req.AddHeader($"x-amz-security-token:{SecureToken}")
+	Req.AddHeader($"x-amz-access-token:{AccessToken}")
+	Req.AddHeader($"x-amz-date:{TimeStamp}")
 	Return Req.PostData($"{EndPoint}{API}", Data)
 End Function
 ```
