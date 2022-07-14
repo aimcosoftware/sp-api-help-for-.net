@@ -8,21 +8,20 @@ Sample code and tips for connecting to Amazon Selling Partner API from .Net
 
 ## 1. Getting the LWA AccessToken
 
-Use your ClientId and ClientSecret from your Amazon App to get an Access Token
+Use your ClientId and ClientSecret from your Amazon App and your client Refresh Token to get an Access Token
 ```
-' Create JSON body (we use our own JSON library for this)
+' Create JSON body (we use our own JSON library)
 Json.OpenBrace()
 Json.AddPair("grant_type", "refresh_token")
-Json.AddPair("client_id", "amzn1.application-oa2-client.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-Json.AddPair("client_secret", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-Json.AddPair("refresh_token", RefreshToken)
+Json.AddPair("client_id", "amzn1.application-oa2-client.xxxxxxx")
+Json.AddPair("client_secret", "xxxxxxx")
+Json.AddPair("refresh_token", "Atzr|xxxxxxx")
 Json.CloseBrace()
 
-' Make the request (we use our own library based on WebClient)
+' Make the request (we use our own library inherited from WebClient)
 Req.Header = "content:application/json"
 Req.Header = "content-type:application/json"
-
-Dim Res = Req.PostData("https://api.amazon.com/auth/o2/token", Json.ToString)
+Res = Req.PostData("https://api.amazon.com/auth/o2/token", Json.ToString)
 
 ' Retrieve the Access Token (valid for 1 hour)
 If Res.Contains("access_token")
