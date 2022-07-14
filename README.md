@@ -13,7 +13,7 @@ This isn't an exhaustive guide, it's just the basic steps for signing and making
 #### We have only used pseudo code here, except where a specific library is needed
 
 ## 1. Get the LWA AccessToken
-### Required to get STS token to sign SP API requests
+### Required to get STS token for signing SP API requests
 
 Use your ClientId and ClientSecret from your Amazon App and your client's Refresh Token to get an Access Token
 ```
@@ -38,7 +38,7 @@ End Sub
 ```
 ## 2. Get the AWS STS token from your IAM User
 ### Required to make SP API calls
-Use IAM user role credentials to get a security token
+Use IAM user role credentials to get a security token and signing credentials
 ```
 ' Get STS credentials using your IAM user credentials
 Sub GetSTSCredentials()
