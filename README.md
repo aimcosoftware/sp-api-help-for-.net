@@ -78,7 +78,7 @@ End Sub
 ```
 ' Signature to authorize SP API and STS requests
 Function Signature(StringToSign As String, Service As String) As String
-	kSecret = $"AWS4{SecretKey}".ToUTF
+	kSecret = Encoding.UTF8.GetBytes($"AWS4{SecretKey}")
 	kDate = Hmac(UTC.ToString("yyyyMMdd"), kSecret)
 	kRegion = Hmac(Region, kDate)
 	kService = Hmac(Service, kRegion)
