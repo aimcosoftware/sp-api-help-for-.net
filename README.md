@@ -19,8 +19,8 @@ Json.AddPair("refresh_token", "Atzr|xxxxxxx")
 Json.CloseBrace()
 
 ' Make the request (we use our own library inherited from WebClient)
-Req.Header = "content:application/json"
-Req.Header = "content-type:application/json"
+Req.AddHeader("content:application/json")
+Req.AddHeader("content-type:application/json")
 Res = Req.PostData("https://api.amazon.com/auth/o2/token", Json.ToString)
 
 ' Retrieve the Access Token (valid for 1 hour)
