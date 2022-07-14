@@ -1,6 +1,8 @@
 # Amazon SP API tips for .Net
 Tips for connecting to Amazon Selling Partner API from .Net. Some of the things we have learned while setting up SP API
 
+This isn't an exhaustive guide, it's just the basic steps for signing and making calls, that we found it hard to extract from the official docs.
+
 #### Basic Steps
 1. [Register as a developer](https://developer-docs.amazon.com/sp-api/docs/registering-as-a-developer) on Amazon
 2. Create Amazon App and [setup IAM user on AWS](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities)
