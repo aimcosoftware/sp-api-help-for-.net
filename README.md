@@ -66,7 +66,7 @@ Req.Header = $"host:sts.{Region}.amazonaws.com"
 Req.Header = $"x-amz-date:{TimeStamp}"
 Dim Res = Req.PostData($"https://sts.{Region}.amazonaws.com", Body)
 
-' Credentials required to sign and make other API calls
+' Credentials to sign SP API calls (valid for 1 hour)
 AccessKey = XMLValue(Res, "AccessKeyId")
 SecretKey = XMLValue(Res, "SecretAccessKey")
 SecureToken = XMLValue(Res, "SessionToken")
