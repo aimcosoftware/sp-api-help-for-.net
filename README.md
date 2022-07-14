@@ -6,7 +6,7 @@ Sample code and tips for connecting to Amazon Selling Partner API from .Net
 #### We have only used pseudo code here, except where a specific library is needed
 
 
-## 1. Getting the LWA AccessToken
+## 1. Get the LWA AccessToken
 
 Use your ClientId and ClientSecret from your Amazon App and your client's Refresh Token to get an Access Token
 ```
