@@ -151,10 +151,10 @@ GetLWAToken()
 GetSTSCredentials()
 
 ' Create some shipping labels
-For each Item in SaleIds
+For each Item in MySalesData
 	' Create JSON request (we use our own JSON builder for this)
 	JSON.OpenBrace()
-	JSON.AddPair("ShippingServiceId", Svc)
+	JSON.AddPair("ShippingServiceId", Item.ServiceId)
 	JSON.OpenBrace("ShipmentRequestDetails")
 	...
 	JSON.CloseBrace()
