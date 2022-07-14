@@ -10,7 +10,7 @@ Sample code and tips for connecting to Amazon Selling Partner API from .Net
 
 Use your ClientId and ClientSecret from your Amazon App to get an Access Token
 ```
-'Create JSON request (we use our own library for this)
+'Create JSON request (we use our own JSON library for this)
 
 Json.OpenBrace()
 Json.AddPair("grant_type", "refresh_token")
