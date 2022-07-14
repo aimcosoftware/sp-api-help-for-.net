@@ -10,8 +10,7 @@ Sample code and tips for connecting to Amazon Selling Partner API from .Net
 
 Use your ClientId and ClientSecret from your Amazon App to get an Access Token
 ```
-'Create JSON request (we use our own JSON library for this)
-
+' Create JSON body (we use our own JSON library for this)
 Json.OpenBrace()
 Json.AddPair("grant_type", "refresh_token")
 Json.AddPair("client_id", "amzn1.application-oa2-client.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
@@ -19,13 +18,13 @@ Json.AddPair("client_secret", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Json.AddPair("refresh_token", RefreshToken)
 Json.CloseBrace()
 
-'Make the request (we use our own library based on WebClient)
-
+' Make the request (we use our own library based on WebClient)
 Req.Header = "content:application/json"
 Req.Header = "content-type:application/json"
 
 Dim Res = Req.PostData("https://api.amazon.com/auth/o2/token", Json.ToString)
 
+' Retrieve the Access Token (valid for 1 hour)
 If Res.Contains("access_token")
   AccessToken = JsonValue(Res, "access_token")
 End If
