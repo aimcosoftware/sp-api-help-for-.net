@@ -75,7 +75,7 @@ SecureToken = XMLValue(Res, "SessionToken")
 ```
 ## 3. Signing and hashing support
 ```
-' Create signature for each request
+' Signature to authorize SP API and STS requests
 Function Signature(StringToSign As String, Service As String) As String
 	kSecret = $"AWS4{SecretKey}".ToUTF
 	kDate = Hmac(UTC.ToString("yyyyMMdd"), kSecret)
