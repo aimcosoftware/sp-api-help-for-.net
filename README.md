@@ -1,7 +1,5 @@
 # Amazon SP API tips for .Net
-Sample code and tips for connecting to Amazon Selling Partner API from .Net
-
-Some of the things we have learned while setting up SP API
+Sample code and tips for connecting to Amazon Selling Partner API from .Net. Some of the things we have learned while setting up SP API
 
 #### We have only used pseudo code here, except where a specific library is needed
 
