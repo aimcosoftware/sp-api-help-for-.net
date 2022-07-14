@@ -1,8 +1,13 @@
 # Amazon SP API tips for .Net
 Tips for connecting to Amazon Selling Partner API from .Net. Some of the things we have learned while setting up SP API
 
-#### We have only used pseudo code here, except where a specific library is needed
+#### Basic Steps
+1. Create Amazon App and setup IAM user on AWS
+2. Use Amazon App credentials to get LWA or RDT Access Token
+3. Use IAM credentials to get STS token used to sign SP API requests 
+4. Use Access Token and STS credentials for signing, to make requests to SP API 
 
+#### We have only used pseudo code here, except where a specific library is needed
 
 ## 1. Get the LWA AccessToken
 ### Required to get STS token to sign SP API requests
