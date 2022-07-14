@@ -35,7 +35,7 @@ User your IAM user role credentials to get a security token
 TimeStamp = UTC.ToString("yyyyMMddTHHmmssZ")
 DateStamp = UTC.ToString("yyyyMMdd")
 
-' Uri encoded body
+' Uri encoded form body
 Body = $"Action=AssumeRole&Version=2011-06-15&RoleArn=arn%3Aaws%3Aiam%3A%3Axxxxxxxxxxxx%3Arole%2FSellingPartnerAPIRole&RoleSessionName={Now.ToUnixTime}"
 
 ' Uri details to hash for signing, region is us-east-1, eu-west-1, etc
