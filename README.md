@@ -10,7 +10,7 @@ This isn't an exhaustive guide, it's just the basic steps for signing and making
 4. Use IAM credentials to get STS token used to sign SP API requests 
 5. Use Access Token and STS credentials for signing, to make requests to SP API 
 
-#### We have only used pseudo code here, except where a specific library is needed
+#### We have only used pseudo code here, except where a specific library is required
 
 ## 1. Get the LWA AccessToken
 ### Required to get STS token for signing SP API requests
